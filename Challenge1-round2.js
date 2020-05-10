@@ -16,33 +16,42 @@ let arrayRemove = (arr, value) => {
 }
 // array = arrayRemove(array, tempArr[0]);
 
+let arrayFind = (arr => {
 
-
-
-
-// Check if value repeats in array
-let checkDuplicates = (arr) =>{
-	array.forEach((item) => {
+	arr.forEach((item) => {
 		let currentValue = arr[0];
 		if(currentValue === item) {
 			tempArr.push(currentValue);	
 		}
 		currentValue = arr[i]
 	})
-	// Add to a new array and clear tempArr
-	newArr.push(tempArr)
+	// Add to a new array
+	if(tempArr.length>1) {
+		return newArr.push(tempArr)
+	} else {
+		return newArr = newArr.concat(tempArr)
+	}
+
+
+
+})
+
+
+
+// Check if value repeats in array
+let checkDuplicates = (arr) =>{
+	arr.forEach((item) => {
+	if(arr.length>0) {
+		arrayFind(arr)
 	// Before we clear tempArr need to remove those values from original array
-	array = arrayRemove(array, tempArr[0]);
+	arr = arrayRemove(arr, tempArr[0]);
+	// clear tempArr
 	tempArr = [];
+		console.log(newArr);
+	}
+})
+
 }
 
 
 
-// for(let j = 0; j<array.length; j++) {
-// array.forEach((item) => {
-array.forEach((item) => {
-	if(array.length>0) {
-		checkDuplicates(array);
-		console.log(newArr);
-	}
-})
