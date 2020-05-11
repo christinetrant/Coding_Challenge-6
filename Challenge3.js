@@ -25,7 +25,7 @@
 
 
 // Find red - rgb (255, 0, 0)
-let input = '#ff0000';
+let input = '#fF0000';
 let array = [];
 // split input into an array:
 array = input.split('');
@@ -44,18 +44,6 @@ array.splice(0, 1)
 // need to change characters into numbers:
 // LOWERCASE!
 
-let letterToNum = (arr) => {
-	return arr.map(item => {
-		console.log('ITEM', item)
-		console.log('ARR', arr)
-		console.log('i', i)
-		if(item === 'f') {
-			item = 15
-			return item
-		}
-		
-	})
-}
 
 
 
@@ -64,28 +52,7 @@ let letterToNum = (arr) => {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-let letterToNum = (arr) => {
+let parseNumbers = (arr => {
 	array = arr.map(item => {
 		// console.log(item)
 		if(item === '0') {
@@ -108,24 +75,29 @@ let letterToNum = (arr) => {
 			return parseInt(item)
 		} else if(item === '9') {
 			return parseInt(item)
-		} else if(item === 'A') {
+		} else if(item.toLowerCase() === 'a') {
 			return item = 10;
-		} else if(item === 'B') {
+		} else if(item.toLowerCase() === 'b') {
 			return item = 11;
-		} else if(item === 'C') {
+		} else if(item.toLowerCase() === 'c') {
 			return item = 12;
-		} else if(item === 'D') {
+		} else if(item.toLowerCase() === 'd') {
 			return item = 13;
-		} else if(item === 'E') {
+		} else if(item.toLowerCase() === 'e') {
 			return item = 14;
-		} else if(item === 'f') {
-			console.log('item equals f')
+		} else if(item.toLowerCase() === 'f') {
 			item = 15
 			return item
 		}
-		
 	})
-}
+})
+
+
+let letterToNum = (arr => {
+	array = arr.map(item => {
+	
+	})
+})
 
 
 
