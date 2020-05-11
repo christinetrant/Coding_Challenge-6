@@ -37,122 +37,172 @@ array.includes('#')
 array.indexOf('#')
 // 0
 // remove # at i = zero and remove one value
+// Need to change in case it is not at zero
 array.splice(0, 1)
 // array now equals
 ["f", "f", "0", "0", "0", "0"]
 
-// need to change characters into numbers:
-// LOWERCASE!
-
-
-
-
-
-
-
-
-
 let parseNumbers = (arr => {
 	array = arr.map(item => {
-		// console.log(item)
-		if(item === '0') {
-			return parseInt(item)
-		} else if(item === '1') {
-			return parseInt(item)
-		} else if(item === '2') {
-			return parseInt(item)
-		} else if(item === '3') {
-			return parseInt(item)
-		} else if(item === '4') {
-			return parseInt(item)
-		} else if(item === '5') {
-			return parseInt(item)
-		} else if(item === '6') {
-			return parseInt(item)
-		} else if(item === '7') {
-			return parseInt(item)
-		} else if(item === '8') {
-			return parseInt(item)
-		} else if(item === '9') {
-			return parseInt(item)
-		} else if(item.toLowerCase() === 'a') {
-			return item = 10;
-		} else if(item.toLowerCase() === 'b') {
-			return item = 11;
-		} else if(item.toLowerCase() === 'c') {
-			return item = 12;
-		} else if(item.toLowerCase() === 'd') {
-			return item = 13;
-		} else if(item.toLowerCase() === 'e') {
-			return item = 14;
-		} else if(item.toLowerCase() === 'f') {
-			item = 15
-			return item
-		}
-	})
-})
-
-
-
-
-
-
-
-
-switch (item) {
-			case 'f':
-				return item = 15;
-				break;
-		}
-
-
-let parseNumbers2 = (arr => {
-	array = arr.map(item => {
-		// console.log(item)
-		switch(item){
+		switch(item.toLowerCase()) {
 			case '0':
-				return parseInt(item)
-				break;
 			case '1':
-				return parseInt(item)
-				break;
 			case '2':
-				return parseInt(item)
-				break;
 			case '3':
-				return parseInt(item)
-				break;
 			case '4':
-				return parseInt(item)
-				break;
 			case '5':
-				return parseInt(item)
-				break;
 			case '6':
-				return parseInt(item)
-				break;
 			case '7':
-				return parseInt(item)
-				break;
 			case '8':
-				return parseInt(item)
-				break;
 			case '9':
 				return parseInt(item)
 				break;
-		} else if(item.toLowerCase() === 'a') {
-			return item = 10;
-		} else if(item.toLowerCase() === 'b') {
-			return item = 11;
-		} else if(item.toLowerCase() === 'c') {
-			return item = 12;
-		} else if(item.toLowerCase() === 'd') {
-			return item = 13;
-		} else if(item.toLowerCase() === 'e') {
-			return item = 14;
-		} else if(item.toLowerCase() === 'f') {
-			item = 15
-			return item
+			case 'a':
+				return item = 10;
+				break;
+			case 'b':
+				return item = 11;
+				break;
+			case 'c':
+				return item = 12;
+				break;
+			case 'd':
+				return item = 13;
+				break;
+			case 'e':
+				return item = 14;
+				break;
+			case 'f':
+				item = 15;
+				return item;
+				break;
+			default:
+				return 'No hex identified'
+				break;
 		}
 	})
 })
+
+// newArrayRGB = 
+
+// array.map(item => {
+// 	let currentEl = item;
+// 	let tempArr2 = [];
+// 	let tempArr = array.splice(0,2)
+// 	let sixteenPower = tempArr.length;
+// 	for(item of tempArr) {
+// 		item = item * (16**sixteenPower)
+// 		sixteenPower--;
+// 		return tempArr2.push(tempArr)
+// 	}
+
+// })
+
+
+
+let array = [15, 15, 0, 0, 0, 0];
+let temp = [];
+
+for(item of array) {
+	if(item / 2) {
+	  item = item * (16**0)
+	  array.push(temp)
+	} else {
+	  item = item * (16**1)
+	  array.push(temp)
+  }
+}
+
+
+
+
+
+
+
+for(let i = 0; i<array.length+1; i++){
+	// for(items of array) {
+	let filteredItems = array.splice(0, 2)
+	temp.push(filteredItems)
+}
+
+
+
+
+let sixteenPower = 2;
+for(item of temp) {
+
+		item = item * (16**sixteenPower)
+		sixteenPower--;
+		array.push(temp)
+	}
+// temp.push(array)
+// ['a', 'b']
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// let parseNumbers = (arr => {
+// 	array = arr.map(item => {
+// 		// console.log(item)
+// 		if(item === '0') {
+// 			return parseInt(item)
+// 		} else if(item === '1') {
+// 			return parseInt(item)
+// 		} else if(item === '2') {
+// 			return parseInt(item)
+// 		} else if(item === '3') {
+// 			return parseInt(item)
+// 		} else if(item === '4') {
+// 			return parseInt(item)
+// 		} else if(item === '5') {
+// 			return parseInt(item)
+// 		} else if(item === '6') {
+// 			return parseInt(item)
+// 		} else if(item === '7') {
+// 			return parseInt(item)
+// 		} else if(item === '8') {
+// 			return parseInt(item)
+// 		} else if(item === '9') {
+// 			return parseInt(item)
+// 		} else if(item.toLowerCase() === 'a') {
+// 			return item = 10;
+// 		} else if(item.toLowerCase() === 'b') {
+// 			return item = 11;
+// 		} else if(item.toLowerCase() === 'c') {
+// 			return item = 12;
+// 		} else if(item.toLowerCase() === 'd') {
+// 			return item = 13;
+// 		} else if(item.toLowerCase() === 'e') {
+// 			return item = 14;
+// 		} else if(item.toLowerCase() === 'f') {
+// 			item = 15
+// 			return item
+// 		}
+// 	})
+// })
+
