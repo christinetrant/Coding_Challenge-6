@@ -24,26 +24,141 @@
 // 192+9 = 201
 
 
-// Find red - rgb (255, 0, 0)
-let input = '#fF0000';
-let array = [];
-// split input into an array:
-array = input.split('');
-// ["#", "f", "f", "0", "0", "0", "0"]
-// Check if includes #
-array.includes('#')
-// true
-// get index of # so we can remove it:
-array.indexOf('#')
-// 0
-// remove # at i = zero and remove one value
-// Need to change in case it is not at zero
-array.splice(0, 1)
-// array now equals
-["f", "f", "0", "0", "0", "0"]
+// Find red - 
+let input = 'rgb(255, 0, 1)'
+// let input = '#fF0000';
 
-let parseNumbers = (arr => {
-	array = arr.map(item => {
+let array = [];
+
+
+
+// array = input.split('');
+// let newArr = [];
+// for(let i = 0; i<array.length; i++) {
+// 	let temp = parseInt(array[i]);
+// 	newArr.push(temp)
+// 	console.log(array[i]);
+// }
+
+
+// RGB to HEX
+// const RgbToHex = (arr) => {
+	let tempStr = input;
+	if(tempStr.includes('rgb(')) {
+		tempStr = tempStr.replace('rgb(', '');
+		if(tempStr.includes(')')) {
+			tempStr = tempStr.replace(')', '')
+		}
+	}
+	array = tempStr.split(',');
+	// ["255", " 0", " 0"]
+	array = array.map((item) => {
+	  return parseInt(item);
+	})
+	// [255, 0, 0]
+
+// work out what hex value should be - first char is division, second is remainder
+let tempr = []
+// array = array.map(item => {
+	let hexTwo;
+	// if(array[0]>9) {
+		let hexOne = array[0] / 16;
+		while(hexTwo>9) {
+		hexTwo = array[0] % 16;
+	}
+		console.log('/', hexOne, '%', hexTwo)
+
+		hexOne.toString();
+		hexTwo.toString();
+		console.log('hexOne', hexOne)
+		console.log('hexTwo', hexTwo)
+
+		let hex = hexOne+hexTwo;
+		console.log('hex', hex)
+
+		tempr.push(hex);
+		console.log(tempr)
+		// return tempr;
+	// }
+// })
+
+
+// NEed this for end of rgb to hex to add extra zero to digit less than 9 
+// 
+	// array = array.map((item) => {
+	// 	// console.log(item)
+	// 	if(item<10) {
+	// 		item = item.toString();
+	// 		item = '0' + item;
+	// 		//item = parseInt(item);
+	// 		return item;
+	// 	} else {
+	// 		return item;
+	// 	}
+	// })
+
+
+
+
+	let newArr = [];
+	for(let i = 0; i<array.length; i++) {
+		let temp = parseInt(array[i]);
+		newArr.push(temp)
+		console.log(array[i]);
+	}
+
+
+
+// }
+
+
+
+arr = input.split('');
+	// ["#", "f", "f", "0", "0", "0", "0"]
+	// Check if includes #
+	if(arr.includes('#')) {
+		// if true get index of # so we can remove it:
+		const hashIndex = arr.indexOf('#');
+		// Need to change in case it is not at zero
+		arr.splice(hashIndex, 1);		
+	}
+
+
+
+
+
+
+// initial Function
+const init = () => {
+	let array = [];
+
+	// Need to figure out if hex or rgb:
+	if(input.includes('#') || input.length = 6 ) {
+		hexToRgb(input);
+	} else if(input.includes(',') || input.includes('rgb')) {
+		RgbToHex(input);
+	} else {
+		console.log('No recognised HEX or RGB value detected')
+	}
+}
+init();
+
+
+// HEX to RGB
+const hexToRgb = (arr) => {
+	// split input into an array:
+	arr = input.split('');
+	// ["#", "f", "f", "0", "0", "0", "0"]
+	// Check if includes #
+	arr.includes('#');
+	// if true get index of # so we can remove it:
+	const hashIndex = arr.indexOf('#');
+	// Need to change in case it is not at zero
+	arr.splice(hashIndex, 1);
+	// array now equals
+	// ["f", "f", "0", "0", "0", "0"]
+
+	arr = arr.map(item => {
 		switch(item.toLowerCase()) {
 			case '0':
 			case '1':
@@ -81,130 +196,19 @@ let parseNumbers = (arr => {
 				break;
 		}
 	})
-})
 
-// newArrayRGB = 
+	// turn hex values in rgb values:
+	let tempArr = [];
 
-// array.map(item => {
-// 	let currentEl = item;
-// 	let tempArr2 = [];
-// 	let tempArr = array.splice(0,2)
-// 	let sixteenPower = tempArr.length;
-// 	for(item of tempArr) {
-// 		item = item * (16**sixteenPower)
-// 		sixteenPower--;
-// 		return tempArr2.push(tempArr)
-// 	}
-
-// })
-
-
-
-let array = [15, 15, 0, 0, 0, 0];
-let temp = [];
-
-for(let i = 0; i<array.length; i++) {
-// for(item of array) {
-	let tempNum;
-	if(i / 2) {
-	  tempNum = array[i] * (16**1)
-	  temp.push(tempNum)
-	} else {
-	  tempNum = array[i] * (16**0)
-	  temp.push(tempNum)
-  }
-}
-
-
-
-
-
-
-
-for(let i = 0; i<array.length+1; i++){
-	// for(items of array) {
-	let filteredItems = array.splice(0, 2)
-	temp.push(filteredItems)
-}
-
-
-
-
-let sixteenPower = 2;
-for(item of temp) {
-
-		item = item * (16**sixteenPower)
-		sixteenPower--;
-		array.push(temp)
+	for(let i = 0; i<arr.length+1; i++) {	
+		let tempNum;
+		tempNum = (arr[0] * (16**1)) + (arr[1] * (16**0));
+		tempArr.push(tempNum);
+		arr.splice(0,2);
 	}
-// temp.push(array)
-// ['a', 'b']
+	arr = arr.concat(tempArr);
+	tempArr = [];
+	console.log(`Hex value ${input} into rgb values are: rgb(${arr[0]}, ${arr[1]}, ${arr[2]})`)
+	return rgb = `rgb(${arr[0]}, ${arr[1]}, ${arr[2]})`
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// let parseNumbers = (arr => {
-// 	array = arr.map(item => {
-// 		// console.log(item)
-// 		if(item === '0') {
-// 			return parseInt(item)
-// 		} else if(item === '1') {
-// 			return parseInt(item)
-// 		} else if(item === '2') {
-// 			return parseInt(item)
-// 		} else if(item === '3') {
-// 			return parseInt(item)
-// 		} else if(item === '4') {
-// 			return parseInt(item)
-// 		} else if(item === '5') {
-// 			return parseInt(item)
-// 		} else if(item === '6') {
-// 			return parseInt(item)
-// 		} else if(item === '7') {
-// 			return parseInt(item)
-// 		} else if(item === '8') {
-// 			return parseInt(item)
-// 		} else if(item === '9') {
-// 			return parseInt(item)
-// 		} else if(item.toLowerCase() === 'a') {
-// 			return item = 10;
-// 		} else if(item.toLowerCase() === 'b') {
-// 			return item = 11;
-// 		} else if(item.toLowerCase() === 'c') {
-// 			return item = 12;
-// 		} else if(item.toLowerCase() === 'd') {
-// 			return item = 13;
-// 		} else if(item.toLowerCase() === 'e') {
-// 			return item = 14;
-// 		} else if(item.toLowerCase() === 'f') {
-// 			item = 15
-// 			return item
-// 		}
-// 	})
-// })
-
+}
