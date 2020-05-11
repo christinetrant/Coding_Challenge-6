@@ -103,13 +103,15 @@ let parseNumbers = (arr => {
 let array = [15, 15, 0, 0, 0, 0];
 let temp = [];
 
-for(item of array) {
-	if(item / 2) {
-	  item = item * (16**0)
-	  array.push(temp)
+for(let i = 0; i<array.length; i++) {
+// for(item of array) {
+	let tempNum;
+	if(i / 2) {
+	  tempNum = array[i] * (16**1)
+	  temp.push(tempNum)
 	} else {
-	  item = item * (16**1)
-	  array.push(temp)
+	  tempNum = array[i] * (16**0)
+	  temp.push(tempNum)
   }
 }
 
