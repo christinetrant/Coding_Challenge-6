@@ -12,3 +12,128 @@
 // RGB
 // (rr, gg, bb) 
 // 0 to 255
+
+
+// Dec -> 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15
+// Hex -> 0 1 2 3 4 5 6 7 8 9 A  B  C  D  E  F
+
+// E.g. C9 to dec:
+// work from right to left (reverse? decrement length - 1)
+// 9 = 9 * (16**0) = 9
+// C = 12 * (16**1) = 192
+// 192+9 = 201
+
+
+// Find red - rgb (255, 0, 0)
+let input = '#ff0000';
+let array = [];
+// split input into an array:
+array = input.split('');
+// ["#", "f", "f", "0", "0", "0", "0"]
+// Check if includes #
+array.includes('#')
+// true
+// get index of # so we can remove it:
+array.indexOf('#')
+// 0
+// remove # at i = zero and remove one value
+array.splice(0, 1)
+// array now equals
+["f", "f", "0", "0", "0", "0"]
+
+// need to change characters into numbers:
+// LOWERCASE!
+
+let letterToNum = (arr) => {
+	return arr.map(item => {
+		console.log('ITEM', item)
+		console.log('ARR', arr)
+		console.log('i', i)
+		if(item === 'f') {
+			item = 15
+			return item
+		}
+		
+	})
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+let letterToNum = (arr) => {
+	array = arr.map(item => {
+		// console.log(item)
+		if(item === '0') {
+			return parseInt(item)
+		} else if(item === '1') {
+			return parseInt(item)
+		} else if(item === '2') {
+			return parseInt(item)
+		} else if(item === '3') {
+			return parseInt(item)
+		} else if(item === '4') {
+			return parseInt(item)
+		} else if(item === '5') {
+			return parseInt(item)
+		} else if(item === '6') {
+			return parseInt(item)
+		} else if(item === '7') {
+			return parseInt(item)
+		} else if(item === '8') {
+			return parseInt(item)
+		} else if(item === '9') {
+			return parseInt(item)
+		} else if(item === 'A') {
+			return item = 10;
+		} else if(item === 'B') {
+			return item = 11;
+		} else if(item === 'C') {
+			return item = 12;
+		} else if(item === 'D') {
+			return item = 13;
+		} else if(item === 'E') {
+			return item = 14;
+		} else if(item === 'f') {
+			console.log('item equals f')
+			item = 15
+			return item
+		}
+		
+	})
+}
+
+
+
+
+
+
+switch (item) {
+			case 'f':
+				return item = 15;
+				break;
+		}
