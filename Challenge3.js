@@ -93,11 +93,6 @@ let parseNumbers = (arr => {
 })
 
 
-let letterToNum = (arr => {
-	array = arr.map(item => {
-	
-	})
-})
 
 
 
@@ -109,3 +104,55 @@ switch (item) {
 				return item = 15;
 				break;
 		}
+
+
+let parseNumbers2 = (arr => {
+	array = arr.map(item => {
+		// console.log(item)
+		switch(item){
+			case '0':
+				return parseInt(item)
+				break;
+			case '1':
+				return parseInt(item)
+				break;
+			case '2':
+				return parseInt(item)
+				break;
+			case '3':
+				return parseInt(item)
+				break;
+			case '4':
+				return parseInt(item)
+				break;
+			case '5':
+				return parseInt(item)
+				break;
+			case '6':
+				return parseInt(item)
+				break;
+			case '7':
+				return parseInt(item)
+				break;
+			case '8':
+				return parseInt(item)
+				break;
+			case '9':
+				return parseInt(item)
+				break;
+		} else if(item.toLowerCase() === 'a') {
+			return item = 10;
+		} else if(item.toLowerCase() === 'b') {
+			return item = 11;
+		} else if(item.toLowerCase() === 'c') {
+			return item = 12;
+		} else if(item.toLowerCase() === 'd') {
+			return item = 13;
+		} else if(item.toLowerCase() === 'e') {
+			return item = 14;
+		} else if(item.toLowerCase() === 'f') {
+			item = 15
+			return item
+		}
+	})
+})
