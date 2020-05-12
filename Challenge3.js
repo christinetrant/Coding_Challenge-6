@@ -58,8 +58,8 @@ let array = [];
 	// [255, 0, 0]
 
 // work out what hex value should be - first char is division, second is remainder
-let tempr = [];
-tempr = array.map(item => {
+// let tempr = [];
+array = array.map(item => {
 
 	// if(array[0]>9) {
 		let hexOne = item / 16;
