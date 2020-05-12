@@ -112,6 +112,11 @@ const rgbToHex = ((arr, color) => {
 		if(tempStr.includes(')')) {
 			tempStr = tempStr.replace(')', '')
 		}
+	} else if(tempStr.includes('(')) {
+		tempStr = tempStr.replace('(', '');
+		if(tempStr.includes(')')) {
+			tempStr = tempStr.replace(')', '')
+		}
 	}
 	arr = tempStr.split(',');
 	// ["255", " 0", " 0"]
