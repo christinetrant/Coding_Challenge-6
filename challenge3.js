@@ -131,43 +131,44 @@ const rgbToHex = ((arr, color) => {
 		return ([hexOne, hexTwo])
 	})).flat();
 	// Need to convert to Hex
-	arr = arr.map(item => {
-		switch(item) {
-			case 0:
-			case 1:
-			case 2:
-			case 3:
-			case 4:
-			case 5:
-			case 6:
-			case 7:
-			case 8:
-			case 9:
-				return item.toString();
-				break;
-			case 10:
-				return item = 'a';
-				break;
-			case 11:
-				return item = 'b';
-				break;
-			case 12:
-				return item = 'c';
-				break;
-			case 13:
-				return item = 'd';
-				break;
-			case 14:
-				return item = 'e';
-				break;
-			case 15:
-				return item = 'f';
-				break;
-			default:
-				return 'No rgb identified'
-				break;
-		}
-	})
+	arr = arr.map(item => item.toString(16));
+	// arr = arr.map(item => {
+	// 	switch(item) {
+	// 		case 0:
+	// 		case 1:
+	// 		case 2:
+	// 		case 3:
+	// 		case 4:
+	// 		case 5:
+	// 		case 6:
+	// 		case 7:
+	// 		case 8:
+	// 		case 9:
+	// 			return item.toString();
+	// 			break;
+	// 		case 10:
+	// 			return item = 'a';
+	// 			break;
+	// 		case 11:
+	// 			return item = 'b';
+	// 			break;
+	// 		case 12:
+	// 			return item = 'c';
+	// 			break;
+	// 		case 13:
+	// 			return item = 'd';
+	// 			break;
+	// 		case 14:
+	// 			return item = 'e';
+	// 			break;
+	// 		case 15:
+	// 			return item = 'f';
+	// 			break;
+	// 		default:
+	// 			return 'No rgb identified'
+	// 			break;
+	// 	}
+	// })
 	// Add # and reduce array into a single string
 	arr.unshift('#')
 	arr = arr.join('');
@@ -195,8 +196,8 @@ const init = (color) => {
 		console.log('No recognised HEX or RGB value detected')
 	}
 }
-init(input);
+// init(input);
 // init(input2);
 // init('dde456') // 221, 228, 86
 // init('#dde456')
-// init(rgb(243, 45, 67))
+init('rgb(243, 45, 67)') // #F32D43
