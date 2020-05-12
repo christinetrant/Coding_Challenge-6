@@ -199,3 +199,4 @@ init(input);
 // init(input2);
 // init('dde456') // 221, 228, 86
 // init('#dde456')
+// init(rgb(243, 45, 67))
