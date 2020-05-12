@@ -63,11 +63,11 @@ array = array.map(item => {
 
 	// if(array[0]>9) {
 		let hexOne = item / 16;
-		tempr.push(hexOne);
-		let hexTwo = item % 16;
-		tempr.push(hexTwo);
+		array.push(hexOne);
+		let hexTwo = parseInt(item % 16);
+		array.push(hexTwo);
 		console.log('/', hexOne, '%', hexTwo)
-		console.log(tempr)
+		console.log(array)
 		// 15 and 15 which is F F
 		// Need to convert to F!
 	// }
