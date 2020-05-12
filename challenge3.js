@@ -58,19 +58,11 @@ let array = [];
 	// [255, 0, 0]
 
 // work out what hex value should be - first char is division, second is remainder
-// let tempr = [];
 array = array.map(item => {
-
-	// if(array[0]>9) {
-		let hexOne = item / 16;
-		array.push(hexOne);
-		let hexTwo = parseInt(item % 16);
-		array.push(hexTwo);
-		console.log('/', hexOne, '%', hexTwo)
-		console.log(array)
+	let hexOne = parseInt(item / 16);
+	let hexTwo = parseInt(item % 16);
 		// 15 and 15 which is F F
 		// Need to convert to F!
-	// }
 	return (`${hexOne}, ${hexTwo}`)
 })
 
