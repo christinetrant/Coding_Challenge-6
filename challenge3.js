@@ -24,159 +24,17 @@
 // 192+9 = 201
 
 
-// Find red - 
-let input = 'rgb(255, 0, 1)'
-// let input = '#fF0000';
+// Example in comments - find red - 
+let input = 'rgb(255, 0, 0)'
+let input2 = '#fF0000';
 
-let array = [];
-
-
-
-// array = input.split('');
-// let newArr = [];
-// for(let i = 0; i<array.length; i++) {
-// 	let temp = parseInt(array[i]);
-// 	newArr.push(temp)
-// 	console.log(array[i]);
-// }
-
-
-// RGB to HEX
-// const RgbToHex = (arr) => {
-	let tempStr = input;
-	if(tempStr.includes('rgb(')) {
-		tempStr = tempStr.replace('rgb(', '');
-		if(tempStr.includes(')')) {
-			tempStr = tempStr.replace(')', '')
-		}
-	}
-	array = tempStr.split(',');
-	// ["255", " 0", " 0"]
-	array = array.map((item) => {
-	  return parseInt(item);
-	})
-	// [255, 0, 0]
-
-// work out what hex value should be - first char is division, second is remainder
-array = (array.map(item => {
-		let hexOne = parseInt(item / 16);
-		let hexTwo = parseInt(item % 16);
-		// 15 and 15 which is F F
-		// Need to convert to F!
-	return ([hexOne, hexTwo])
-})).flat();
-
-
-array = array.map(item => {
-		switch(item) {
-			case 0:
-			case 1:
-			case 2:
-			case 3:
-			case 4:
-			case 5:
-			case 6:
-			case 7:
-			case 8:
-			case 9:
-				return item.toString();
-				break;
-			case 10:
-				return item = 'a';
-				break;
-			case 11:
-				return item = 'b';
-				break;
-			case 12:
-				return item = 'c';
-				break;
-			case 13:
-				return item = 'd';
-				break;
-			case 14:
-				return item = 'e';
-				break;
-			case 15:
-				return item = 'f';
-				break;
-			default:
-				return 'No rgb identified'
-				break;
-		}
-	})
-
-// Reduce array into a single string and add #
-array.unshift('#')
-array = array.join('');
-
-
-
-
-// NEed this for end of rgb to hex to add extra zero to digit less than 9 
-// 
-	// array = array.map((item) => {
-	// 	// console.log(item)
-	// 	if(item<10) {
-	// 		item = item.toString();
-	// 		item = '0' + item;
-	// 		//item = parseInt(item);
-	// 		return item;
-	// 	} else {
-	// 		return item;
-	// 	}
-	// })
-
-
-
-
-	let newArr = [];
-	for(let i = 0; i<array.length; i++) {
-		let temp = parseInt(array[i]);
-		newArr.push(temp)
-		console.log(array[i]);
-	}
-
-
-
-// }
-
-
-// Split input into array
-arr = input.split('');
-	// ["#", "f", "f", "0", "0", "0", "0"]
-	// Check if includes #
-	if(arr.includes('#')) {
-		// if true get index of # so we can remove it:
-		const hashIndex = arr.indexOf('#');
-		// Need to change in case it is not at zero
-		arr.splice(hashIndex, 1);		
-	}
-
-
-
-
-
-
-// initial Function
-const init = () => {
-	let array = [];
-
-	// Need to figure out if hex or rgb:
-	if(input.includes('#') || input.length === 6 ) {
-		hexToRgb(input);
-	} else if(input.includes(',') || input.includes('rgb')) {
-		RgbToHex(input);
-	} else {
-		console.log('No recognised HEX or RGB value detected')
-	}
-}
-init();
-
-
-// HEX to RGB
-const hexToRgb = (arr) => {
+// ---------- HEX TO RGB ---------- //
+const hexToRgb = ((arr, color) => {
+	let tempStr = color;
+	// have an empty array to temporarily store items
+	let tempArr = [];
 	// split input into an array:
-	arr = input.split('');
+	arr = tempStr.split('');
 	// ["#", "f", "f", "0", "0", "0", "0"]
 	// Check if includes #
 	arr.includes('#');
@@ -186,7 +44,6 @@ const hexToRgb = (arr) => {
 	arr.splice(hashIndex, 1);
 	// array now equals
 	// ["f", "f", "0", "0", "0", "0"]
-
 	arr = arr.map(item => {
 		switch(item.toLowerCase()) {
 			case '0':
@@ -225,19 +82,113 @@ const hexToRgb = (arr) => {
 				break;
 		}
 	})
-
+	// [15, 15, 0, 0, 0, 0]
 	// turn hex values in rgb values:
-	let tempArr = [];
-
 	for(let i = 0; i<arr.length+1; i++) {	
 		let tempNum;
+		// take first 2 numbers in arr - mulitply first number by 16 power of 1, multiply second number by 16 power of 0.  Add results to get one number between 0 and 255
 		tempNum = (arr[0] * (16**1)) + (arr[1] * (16**0));
+		// Push above result into temp array
 		tempArr.push(tempNum);
+		// Remove the 2 numbers we used from the main array
 		arr.splice(0,2);
 	}
+	// After looping through full array we have [255, 0, 0]
+	// Add that number to end of main array
 	arr = arr.concat(tempArr);
+	// Empty temp Array
 	tempArr = [];
-	console.log(`Hex value ${input} into rgb values are: rgb(${arr[0]}, ${arr[1]}, ${arr[2]})`)
+	// Print out result
+	console.log(`Hex value ${color} into rgb values are: rgb(${arr[0]}, ${arr[1]}, ${arr[2]})`)
 	return rgb = `rgb(${arr[0]}, ${arr[1]}, ${arr[2]})`
+})
 
+// ---------- RGB TO HEX ---------- //
+const rgbToHex = ((arr, color) => {
+	let tempStr = color;
+	if(tempStr.includes('rgb(')) {
+		tempStr = tempStr.replace('rgb(', '');
+		if(tempStr.includes(')')) {
+			tempStr = tempStr.replace(')', '')
+		}
+	}
+	arr = tempStr.split(',');
+	// ["255", " 0", " 0"]
+	arr = arr.map((item) => {
+		return parseInt(item);
+	})
+	// [255, 0, 0]
+	// work out what hex value should be - first char is division, second is remainder
+	arr = (arr.map(item => {
+		let hexOne = parseInt(item / 16);
+		let hexTwo = parseInt(item % 16);
+		return ([hexOne, hexTwo])
+	})).flat();
+	// Need to convert to Hex
+	arr = arr.map(item => {
+		switch(item) {
+			case 0:
+			case 1:
+			case 2:
+			case 3:
+			case 4:
+			case 5:
+			case 6:
+			case 7:
+			case 8:
+			case 9:
+				return item.toString();
+				break;
+			case 10:
+				return item = 'a';
+				break;
+			case 11:
+				return item = 'b';
+				break;
+			case 12:
+				return item = 'c';
+				break;
+			case 13:
+				return item = 'd';
+				break;
+			case 14:
+				return item = 'e';
+				break;
+			case 15:
+				return item = 'f';
+				break;
+			default:
+				return 'No rgb identified'
+				break;
+		}
+	})
+	// Add # and reduce array into a single string
+	arr.unshift('#')
+	arr = arr.join('');
+	// Print out result!
+	console.log(`rgb value ${color} into hex values are: ${arr}`);
+	return hex = arr;
+})
+
+
+
+// ---------- Initial Function ---------- //
+const init = (color) => {
+	let array = [];
+	// let rgb = '';
+	// let hex = '';
+
+	// Need to figure out if hex or rgb:
+	if(color.includes('#') || color.length === 6 ) {
+		console.log('Input is HEX');
+		hexToRgb(array, color);
+		return rgb;
+	} else if(color.includes(',') || color.includes('rgb')) {
+		console.log('Input is RGB');
+		rgbToHex(array, color);
+		return hex;
+	} else {
+		console.log('No recognised HEX or RGB value detected')
+	}
 }
+init(input);
