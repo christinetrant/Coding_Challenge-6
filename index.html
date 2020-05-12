@@ -10,16 +10,16 @@
 
 		<h1>Color Converter</h1>
 		<h2>Hex <-> RGB</h2>
-		
-		<section>
-			<h3>Enter Color: <h3>
-			<p class="output">e.g., rgb(240,240,216) or #F0F0D8"</p>
-			<input type="text" class="input" id="input" value="Enter a color">
-		</section>
+		<h3 id="copy"></h3>
+		<div style="opacity:0">
+        <input type="text" id="copyText"/>
+    </div>
 
-		<!-- <section>
-			<label for="hex">HEX: </label><input type="text" class="input" id="hexInput" value="#F0F0D8">
-		</section> -->
+		<section>
+			<!-- <h3>Enter Color: <h3> -->
+			<input type="text" class="input" id="input" value="Enter a color">
+			<h3 class="output">e.g., rgb(240,240,216) or #F0F0D8"</h3>
+		</section>
 
 		<section>
 			<button id="button">Convert!</button>
