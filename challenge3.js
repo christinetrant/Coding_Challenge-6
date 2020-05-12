@@ -37,11 +37,12 @@ const hexToRgb = ((arr, color) => {
 	arr = tempStr.split('');
 	// ["#", "f", "f", "0", "0", "0", "0"]
 	// Check if includes #
-	arr.includes('#');
-	// if true get index of # so we can remove it:
-	const hashIndex = arr.indexOf('#');
-	// Need to change in case it is not at zero
-	arr.splice(hashIndex, 1);
+	if(arr.includes('#')) {
+		// if true get index of # so we can remove it:
+		const hashIndex = arr.indexOf('#');
+		// Need to change in case it is not at zero
+		arr.splice(hashIndex, 1);
+	}
 	// array now equals
 	// ["f", "f", "0", "0", "0", "0"]
 	arr = arr.map(item => {
@@ -175,8 +176,6 @@ const rgbToHex = ((arr, color) => {
 // ---------- Initial Function ---------- //
 const init = (color) => {
 	let array = [];
-	// let rgb = '';
-	// let hex = '';
 
 	// Need to figure out if hex or rgb:
 	if(color.includes('#') || color.length === 6 ) {
@@ -192,3 +191,6 @@ const init = (color) => {
 	}
 }
 init(input);
+// init(input2);
+// init('dde456') // 221, 228, 86
+// init('#dde456')
