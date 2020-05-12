@@ -58,29 +58,65 @@ let array = [];
 	// [255, 0, 0]
 
 // work out what hex value should be - first char is division, second is remainder
-let tempr = []
-// array = array.map(item => {
-	let hexTwo;
+let tempr = [];
+tempr = array.map(item => {
+
 	// if(array[0]>9) {
-		let hexOne = array[0] / 16;
-		while(hexTwo>9) {
-		hexTwo = array[0] % 16;
-	}
+		let hexOne = item / 16;
+		tempr.push(hexOne);
+		let hexTwo = item % 16;
+		tempr.push(hexTwo);
 		console.log('/', hexOne, '%', hexTwo)
-
-		hexOne.toString();
-		hexTwo.toString();
-		console.log('hexOne', hexOne)
-		console.log('hexTwo', hexTwo)
-
-		let hex = hexOne+hexTwo;
-		console.log('hex', hex)
-
-		tempr.push(hex);
 		console.log(tempr)
-		// return tempr;
+		// 15 and 15 which is F F
+		// Need to convert to F!
 	// }
-// })
+	return (`${hexOne}, ${hexTwo}`)
+})
+
+arr = arr.map(item => {
+		switch(item) {
+			case '0':
+			case '1':
+			case '2':
+			case '3':
+			case '4':
+			case '5':
+			case '6':
+			case '7':
+			case '8':
+			case '9':
+				return `0${item})`
+				break;
+			case '10':
+				return item = 'a';
+				break;
+			case '11':
+				return item = 'b';
+				break;
+			case '12':
+				return item = 'c';
+				break;
+			case '13':
+				return item = 'd';
+				break;
+			case '14':
+				return item = 'e';
+				break;
+			case '15':
+				item = 'f';
+				return item;
+				break;
+			default:
+				return 'No hex identified'
+				break;
+		}
+	})
+
+
+
+
+
 
 
 // NEed this for end of rgb to hex to add extra zero to digit less than 9 
@@ -112,7 +148,7 @@ let tempr = []
 // }
 
 
-
+// Split input into array
 arr = input.split('');
 	// ["#", "f", "f", "0", "0", "0", "0"]
 	// Check if includes #
@@ -133,7 +169,7 @@ const init = () => {
 	let array = [];
 
 	// Need to figure out if hex or rgb:
-	if(input.includes('#') || input.length = 6 ) {
+	if(input.includes('#') || input.length === 6 ) {
 		hexToRgb(input);
 	} else if(input.includes(',') || input.includes('rgb')) {
 		RgbToHex(input);
