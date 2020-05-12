@@ -58,55 +58,56 @@ let array = [];
 	// [255, 0, 0]
 
 // work out what hex value should be - first char is division, second is remainder
-array = array.map(item => {
-	let hexOne = parseInt(item / 16);
-	let hexTwo = parseInt(item % 16);
+array = (array.map(item => {
+		let hexOne = parseInt(item / 16);
+		let hexTwo = parseInt(item % 16);
 		// 15 and 15 which is F F
 		// Need to convert to F!
-	return (`${hexOne}, ${hexTwo}`)
-})
+	return ([hexOne, hexTwo])
+})).flat();
 
-arr = arr.map(item => {
+
+array = array.map(item => {
 		switch(item) {
-			case '0':
-			case '1':
-			case '2':
-			case '3':
-			case '4':
-			case '5':
-			case '6':
-			case '7':
-			case '8':
-			case '9':
-				return `0${item})`
+			case 0:
+			case 1:
+			case 2:
+			case 3:
+			case 4:
+			case 5:
+			case 6:
+			case 7:
+			case 8:
+			case 9:
+				return item.toString();
 				break;
-			case '10':
+			case 10:
 				return item = 'a';
 				break;
-			case '11':
+			case 11:
 				return item = 'b';
 				break;
-			case '12':
+			case 12:
 				return item = 'c';
 				break;
-			case '13':
+			case 13:
 				return item = 'd';
 				break;
-			case '14':
+			case 14:
 				return item = 'e';
 				break;
-			case '15':
-				item = 'f';
-				return item;
+			case 15:
+				return item = 'f';
 				break;
 			default:
-				return 'No hex identified'
+				return 'No rgb identified'
 				break;
 		}
 	})
 
-
-
+// Reduce array into a single string and add #
+array.unshift('#')
+array = array.join('');
 
 
 
