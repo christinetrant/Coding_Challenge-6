@@ -45,44 +45,45 @@ const hexToRgb = ((arr, color) => {
 	}
 	// array now equals
 	// ["f", "f", "0", "0", "0", "0"]
-	arr = arr.map(item => {
-		switch(item.toLowerCase()) {
-			case '0':
-			case '1':
-			case '2':
-			case '3':
-			case '4':
-			case '5':
-			case '6':
-			case '7':
-			case '8':
-			case '9':
-				return parseInt(item)
-				break;
-			case 'a':
-				return item = 10;
-				break;
-			case 'b':
-				return item = 11;
-				break;
-			case 'c':
-				return item = 12;
-				break;
-			case 'd':
-				return item = 13;
-				break;
-			case 'e':
-				return item = 14;
-				break;
-			case 'f':
-				item = 15;
-				return item;
-				break;
-			default:
-				return 'No hex identified'
-				break;
-		}
-	})
+	arr = arr.map(item => parseInt(item, 16));
+	// arr = arr.map(item => {
+	// 	switch(item.toLowerCase()) {
+	// 		case '0':
+	// 		case '1':
+	// 		case '2':
+	// 		case '3':
+	// 		case '4':
+	// 		case '5':
+	// 		case '6':
+	// 		case '7':
+	// 		case '8':
+	// 		case '9':
+	// 			return parseInt(item)
+	// 			break;
+	// 		case 'a':
+	// 			return item = 10;
+	// 			break;
+	// 		case 'b':
+	// 			return item = 11;
+	// 			break;
+	// 		case 'c':
+	// 			return item = 12;
+	// 			break;
+	// 		case 'd':
+	// 			return item = 13;
+	// 			break;
+	// 		case 'e':
+	// 			return item = 14;
+	// 			break;
+	// 		case 'f':
+	// 			item = 15;
+	// 			return item;
+	// 			break;
+	// 		default:
+	// 			return 'No hex identified'
+	// 			break;
+	// 	}
+	// })
 	// [15, 15, 0, 0, 0, 0]
 	// turn hex values in rgb values:
 	for(let i = 0; i<arr.length+1; i++) {	
@@ -198,6 +199,6 @@ const init = (color) => {
 }
 // init(input);
 // init(input2);
-// init('dde456') // 221, 228, 86
+init('dde456') // 221, 228, 86
 // init('#dde456')
-init('rgb(243, 45, 67)') // #F32D43
+// init('rgb(243, 45, 67)') // #F32D43
