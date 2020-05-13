@@ -74,7 +74,7 @@ label { font-size: 1.5rem; align-self: center; }
 
 .tooltip .tooltiptext {
   visibility: hidden;
-  width: 120px;
+  width: 150px;
   background-color: #41403E;
   color: #F0F0D8;
   text-align: center;
