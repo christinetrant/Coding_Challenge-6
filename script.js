@@ -1,38 +1,8 @@
 const body = document.querySelector('body');
 const input = document.getElementById('input');
-// let inputValue = document.getElementById('input').value;
 const button = document.getElementById('button');
 const output = document.getElementsByClassName('output')[0];
 const h3 = document.querySelector('h3');
-console.log(body)
-// console.log(inputValue);
-// console.log(button);
-// console.log(h3.textContent);
-
-
-
-
-
-function copyText() {
-	console.log('clicked!!!!!!!!')
-  /* Get the text field */
-  // var copyText = document.getElementById("myInput");
-
-  /* Select the text field */
-  input.select();
-  input.setSelectionRange(0, 99999); /*For mobile devices*/
-
-  /* Copy the text inside the text field */
-  document.execCommand("copy");
-
-  /* Alert the copied text */
-  alert("Copied the text: " + input.value);
-}
-
-
-
-
-
 
 
 // ---------- HEX TO RGB ---------- //
@@ -49,6 +19,11 @@ const hexToRgb = ((arr, color) => {
 		const hashIndex = arr.indexOf('#');
 		// Need to change in case it is not at zero
 		arr.splice(hashIndex, 1);
+	}
+	// if input is a 3 letter hex
+	if(arr.length===3) {
+		arr = arr.map(item => item.concat(item));
+		arr = arr.map(item => item.split('')).flat();
 	}
 	// array now equals
 	// ["f", "f", "0", "0", "0", "0"]
@@ -70,14 +45,14 @@ const hexToRgb = ((arr, color) => {
 	tempArr = [];
 	// Print out result
 	output.textContent = `Hex value ${color} into rgb values are: rgb(${arr[0]}, ${arr[1]}, ${arr[2]})`;
-	h3.textContent = arr;
+	h3.textContent = `rgb(${arr[0]}, ${arr[1]}, ${arr[2]})`;
 	// change input to the new value
-	input.value = `rgb(${arr[0]}, ${arr[1]}, ${arr[2]})`
+	// input.value = `rgb(${arr[0]}, ${arr[1]}, ${arr[2]})`
 	// add event listener so value can be copied
-	input.addEventListener('click', copyText);
-	
-	// input.blur();
-
+	// h3.addEventListener('click', copyText, false);
+	h3.addEventListener('click', copyText);
+		h3.addEventListener('mouseout', outFunc);
+	input.blur();
 	return rgb = `rgb(${arr[0]}, ${arr[1]}, ${arr[2]})`
 })
 
@@ -115,101 +90,67 @@ const rgbToHex = ((arr, color) => {
 	// Print out result!
 	output.textContent = `rgb value ${color} into hex values are: ${arr}`;
 	h3.textContent = arr;
-	input.value = arr;
+	// input.value = arr;
 	input.blur();
-	input.addEventListener('click', copyText);
+	// h3.addEventListener('click', copyText, false);
+h3.addEventListener('click', copyText);
+		h3.addEventListener('mouseout', outFunc);
 	return hex = arr;
 })
-
 
 
 // ---------- Initial Function ---------- //
 const init = (color) => {
 	let array = [];
-
 	// Need to figure out if hex or rgb:
-	if(color.includes('#') || color.length === 6 ) {
-		console.log('Input is HEX');
+	if(color.includes('#') || color.length === 6 || color.length === 3) {
+		// console.log('Input is HEX');
 		hexToRgb(array, color);
 		return rgb;
 	} else if(color.includes(',') || color.includes('rgb')) {
-		console.log('Input is RGB');
+		// console.log('Input is RGB');
 		rgbToHex(array, color);
 		return hex;
 	} else {
 		console.log('No recognised HEX or RGB value detected')
 	}
 }
-// init(input);
-// init(input2);
-// init('dde456') // 221, 228, 86
-// init('#dde456')
-// init('rgb(243, 45, 67)') // #F32D43
 
+const copyText = () => {
+	const copyh3 = document.getElementById("color-output"); 
+	// set the input with the hidden field so that you can call select on it
+  const hiddenField = document.getElementById("hidden-input");
+  hiddenField.value = copyh3.innerHTML;
+  hiddenField.select();
+  document.execCommand("copy");
+  const tooltip = document.getElementById("myTooltip");
+  tooltip.textContent = "Copied: " + hiddenField.value;
+  clearInput();
+}
 
+const outFunc = () => {
+  const tooltip = document.getElementById("myTooltip");
+  tooltip.textContent = "Click to copy";
+}
 
+const clearInput = () => input.value = 'Enter a color';
+const inputFocus = () => input.select();
 
-
-
-
-
-
-
-
-function convertAfterClick() {
+const convertAfterClick = () => {
 	let inputValue = document.getElementById('input').value;
 	if(inputValue.length > 0) {
-		console.log('clicked', inputValue);
 		init(inputValue);
 	}
 }
 
-function convertAfterEnter(event) {
+const convertAfterEnter = (event) => {
 	let inputValue = document.getElementById('input').value;
 	if(inputValue.length > 0 && event.which === 13) {
-		console.log('entered', document.getElementById('input').value);
 		init(inputValue);
 	}
 }
 
 // EVENT LISTENERS
-input.addEventListener('focus', function() {
-	this.select();
-})
+input.addEventListener('focus', inputFocus);
 input.addEventListener("keypress", convertAfterEnter);
 button.addEventListener("click", convertAfterClick);
-
-// h3.addEventListener("click", myFunction);
-
-
-// 
-// h3.addEventListener("click", function(){
-
-//     let copyText = document.getElementById("color-output");
-    
-//     // set the input with the hidden field so that you can call select on it
-//     const hiddenField = document.getElementById("hidden-input");
-//     hiddenField.value = copyText.innerHTML;
-//     hiddenField.select();
-//     document.execCommand("color-output");
-    
-//     alert("Copied the text: " + hiddenField.value);
-
-// }, false);
-
-
-
-// input.addEventListener('click', function() {
-//   /* Get the text field */
-//   // var copyText = document.getElementById("myInput");
-
-//   /* Select the text field */
-//   input.select();
-//   input.setSelectionRange(0, 99999); /*For mobile devices*/
-
-//   /* Copy the text inside the text field */
-//   document.execCommand("copy");
-
-//   /* Alert the copied text */
-//   alert("Copied the text: " + input.value);
-// })
