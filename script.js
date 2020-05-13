@@ -6,14 +6,28 @@ const output = document.getElementsByClassName('output')[0];
 const h3 = document.querySelector('h3');
 console.log(body)
 // console.log(inputValue);
-console.log(button);
-console.log(h3.textContent);
+// console.log(button);
+// console.log(h3.textContent);
 
 
 
 
 
+function copyText() {
+	console.log('clicked!!!!!!!!')
+  /* Get the text field */
+  // var copyText = document.getElementById("myInput");
 
+  /* Select the text field */
+  input.select();
+  input.setSelectionRange(0, 99999); /*For mobile devices*/
+
+  /* Copy the text inside the text field */
+  document.execCommand("copy");
+
+  /* Alert the copied text */
+  alert("Copied the text: " + input.value);
+}
 
 
 
@@ -57,7 +71,12 @@ const hexToRgb = ((arr, color) => {
 	// Print out result
 	output.textContent = `Hex value ${color} into rgb values are: rgb(${arr[0]}, ${arr[1]}, ${arr[2]})`;
 	h3.textContent = arr;
-	input.blur();
+	// change input to the new value
+	input.value = `rgb(${arr[0]}, ${arr[1]}, ${arr[2]})`
+	// add event listener so value can be copied
+	input.addEventListener('click', copyText);
+	
+	// input.blur();
 
 	return rgb = `rgb(${arr[0]}, ${arr[1]}, ${arr[2]})`
 })
@@ -96,7 +115,9 @@ const rgbToHex = ((arr, color) => {
 	// Print out result!
 	output.textContent = `rgb value ${color} into hex values are: ${arr}`;
 	h3.textContent = arr;
+	input.value = arr;
 	input.blur();
+	input.addEventListener('click', copyText);
 	return hex = arr;
 })
 
@@ -161,37 +182,34 @@ button.addEventListener("click", convertAfterClick);
 // h3.addEventListener("click", myFunction);
 
 
-h3.addEventListener("click", function(){
+// 
+// h3.addEventListener("click", function(){
 
-    var copy = document.getElementById("copy");
+//     let copyText = document.getElementById("color-output");
     
-    // set "#Color 1" with the hidden field so that you can call select on it
-    var hiddenField = document.getElementById("copyText");
-    hiddenField.value = copy.innerHTML;
-    hiddenField.select();
-    document.execCommand("copy");
+//     // set the input with the hidden field so that you can call select on it
+//     const hiddenField = document.getElementById("hidden-input");
+//     hiddenField.value = copyText.innerHTML;
+//     hiddenField.select();
+//     document.execCommand("color-output");
     
-    alert("Copied the text: " + hiddenField.value);
+//     alert("Copied the text: " + hiddenField.value);
 
-}, false);
-
-
-
-// const copyToClipboard = () => {
-  /* Get the text field */
-  // var copyText = h3.textContent;
-
-  /* Select the text field */
-  // copyText.select();
-  // copyText.setSelectionRange(0, 99999); /*For mobile devices*/
-
-  /* Copy the text inside the text field */
-  // document.execCommand("copy");
-
-  /* Alert the copied text */
-  // alert("Copied the text: " + copyText);
-// }
+// }, false);
 
 
 
+// input.addEventListener('click', function() {
+//   /* Get the text field */
+//   // var copyText = document.getElementById("myInput");
 
+//   /* Select the text field */
+//   input.select();
+//   input.setSelectionRange(0, 99999); /*For mobile devices*/
+
+//   /* Copy the text inside the text field */
+//   document.execCommand("copy");
+
+//   /* Alert the copied text */
+//   alert("Copied the text: " + input.value);
+// })
