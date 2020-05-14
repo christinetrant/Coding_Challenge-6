@@ -151,7 +151,7 @@ const inputError = () => {
 	displayOutput()
 	h3PrintTitle.textContent = 'No recognised HEX or RGB value detected';
 	// after showing no value reset to initial view
-	setTimeout(clearInput, 2000);
+	setTimeout(clearInput, 5000);
 }
 // ---------- DISPLAY RESULT ---------- //
 const displayOutput = () => {
