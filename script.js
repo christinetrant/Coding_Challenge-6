@@ -17,7 +17,6 @@ const h3 = document.getElementById('color-output');
 const outFunc = () => {
   const tooltip = document.getElementById("myTooltip");
   tooltip.textContent = "Copy";
-  // h3.textContent = '';
 }
 
 
@@ -131,7 +130,10 @@ const init = (color) => {
 		rgbToHex(array, color);
 		return hex;
 	} else {
-		console.log('No recognised HEX or RGB value detected')
+		h3.style.display="block";
+		h3.textContent = 'No recognised HEX or RGB value detected';
+		// after showing no value reset to initial view
+		setTimeout(inputFocus, 2000);
 	}
 }
 
