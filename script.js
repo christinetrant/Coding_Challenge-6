@@ -5,15 +5,6 @@ const output = document.getElementsByClassName('output')[0];
 const h3PrintTitle = document.getElementById('color-output');
 const hiddenDiv = document.getElementById('hidden-div');
 
-
-
-
-const outFunc = () => {
-  const tooltip = document.getElementById("myTooltip");
-  tooltip.textContent = "Copy";
-}
-
-
 // ---------- HEX TO RGB ---------- //
 const hexToRgb = ((arr, color) => {
 	let tempStr = color;
@@ -62,11 +53,8 @@ const hexToRgb = ((arr, color) => {
 		//Display output - make h3 color output and hidden div block display
 		displayOutput();
 		h3PrintTitle.textContent = `rgb(${arr[0]}, ${arr[1]}, ${arr[2]})`;
-		// change input to the new value
-		// input.value = `rgb(${arr[0]}, ${arr[1]}, ${arr[2]})`
 		// add event listener so value can be copied
-		// h3.addEventListener('click', copyText, false);
-		// h3.addEventListener('click', copyText);
+		h3PrintTitle.addEventListener('click', copyText);
 		h3PrintTitle.addEventListener('mouseout', outFunc);
 		input.blur();
 		return rgb = `rgb(${arr[0]}, ${arr[1]}, ${arr[2]})`	
@@ -75,7 +63,12 @@ const hexToRgb = ((arr, color) => {
 
 // ---------- RGB TO HEX ---------- //
 const rgbToHex = ((arr, color) => {
+
 	let tempStr = color;
+	// if user enters 233,0,3, we need to remove end ,
+	if(tempStr.endsWith(",")) {
+		return inputError();
+	}
 	if(tempStr.includes('rgb(')) {
 		tempStr = tempStr.replace('rgb(', '');
 		if(tempStr.includes(')')) {
@@ -93,7 +86,6 @@ const rgbToHex = ((arr, color) => {
 		return parseInt(item);
 	})
 	// [255, 0, 0]
-
 	// Check to make sure there are no values above 255
 	let check = arr.some(item => item > 255)
 	if(check === true) {
@@ -115,17 +107,15 @@ const rgbToHex = ((arr, color) => {
 		displayOutput();
 		output.textContent = `rgb value ${color} into hex values are: ${arr}`;
 		h3PrintTitle.textContent = arr;
-		// input.value = arr;
 		input.blur();
-		// h3.addEventListener('click', copyText, false);
-		// h3.addEventListener('click', copyText);
+		h3PrintTitle.addEventListener('click', copyText);
 		h3PrintTitle.addEventListener('mouseout', outFunc);
 		return hex = arr;
 	}
 })
 
 
-// ---------- Initial Function ---------- //
+// ---------- INITIAL FUNCTION---------- //
 const init = (color) => {
 	let array = [];
 	// Need to figure out if hex or rgb:
@@ -141,9 +131,21 @@ const init = (color) => {
 		inputError();
 	}
 }
-
-
-// if user enters incorrect values
+// ---------- RUN INIT AFTER BUTTON CLICKED ---------- //
+const convertAfterClick = () => {
+	let inputValue = document.getElementById('input').value;
+	if(inputValue.length > 0) {
+		init(inputValue);
+	}
+}
+// ---------- RUN INIT AFTER ENTER PRESSED ---------- //
+const convertAfterEnter = (event) => {
+	let inputValue = document.getElementById('input').value;
+	if(inputValue.length > 0 && event.which === 13) {
+		init(inputValue);
+	}
+}
+// ---------- INPUT ERROR - INCORRECT ENTERED VALUES ---------- //
 const inputError = () => {
 	//Display output - make h3 color output and hidden div block display
 	displayOutput()
@@ -151,108 +153,42 @@ const inputError = () => {
 	// after showing no value reset to initial view
 	setTimeout(clearInput, 2000);
 }
-
-
-// display result - change html to display block
+// ---------- DISPLAY RESULT ---------- //
 const displayOutput = () => {
 	h3PrintTitle.style.display = "block";
 	hiddenDiv.style.display = "block";
 }
-// return input text to original
+// ---------- INPUT TEXT BACK TO ORIGINAL ---------- //
 const clearInput = () => {
 	input.value = 'Enter a color';
 	input.select();
 	h3PrintTitle.style.display = "none";
 	hiddenDiv.style.display = "none"
 }
-
+// ---------- FOCUS INPUT ---------- //
 const inputFocus = () => {
 	input.value = 'Enter a color';
 	input.select();
 	h3PrintTitle.textContent = '';
 }
-const convertAfterClick = () => {
-	let inputValue = document.getElementById('input').value;
-	if(inputValue.length > 0) {
-		init(inputValue);
-	}
+// ---------- COPY TEXT TO CLIPBOARD ---------- //
+const copyText = () => {
+	// set h3 value result to equal hidden div so that it can be selected
+	// Workaround as copy is mainly for input fields
+	var hiddenField = document.getElementById("copyText");
+	hiddenField.value = h3PrintTitle.textContent;
+	hiddenField.select();
+	document.execCommand("copy");
+	// tooltip to let user know value has been copied
+	const tooltip = document.getElementById("myTooltip");
+	tooltip.textContent = "Copied: " + hiddenField.value;
+};
+// ----- AFTER COPY IS CLICKED ----- //
+const outFunc = () => {
+  const tooltip = document.getElementById("myTooltip");
+  tooltip.textContent = "Copy";
 }
-
-const convertAfterEnter = (event) => {
-	let inputValue = document.getElementById('input').value;
-	if(inputValue.length > 0 && event.which === 13) {
-		init(inputValue);
-	}
-}
-
-// EVENT LISTENERS
+// ---------- EVENT LISTENERS ---------- //
 input.addEventListener('focus', inputFocus);
 input.addEventListener("keypress", convertAfterEnter);
 button.addEventListener("click", convertAfterClick);
-
-
-
-
-
-// h3.addEventListener("click", myFunction);
-
-
-h3PrintTitle.addEventListener("click", function(){
-
-    var copy = document.getElementById("color-output");
-
-    // set "#Color 1" with the hidden field so that you can call select on it
-    var hiddenField = document.getElementById("copyText");
-    hiddenField.value = copy.innerHTML;
-    hiddenField.select();
-    document.execCommand("copy");
-
-    // alert("Copied the text: " + hiddenField.value);
-    const tooltip = document.getElementById("myTooltip");
-	  tooltip.textContent = "Copied: " + hiddenField.value;
-	  // inputFocus();
-}, false);
-
-
-
-// const copyToClipboard = () => {
-  /* Get the text field */
-  // var copyText = h3.textContent;
-
-  /* Select the text field */
-  // copyText.select();
-  // copyText.setSelectionRange(0, 99999); /*For mobile devices*/
-
-  /* Copy the text inside the text field */
-  // document.execCommand("copy");
-
-  /* Alert the copied text */
-  // alert("Copied the text: " + copyText);
-// }
-
-
-// const copyText = () => {
-// 	const copyh3 = document.getElementById("color-output"); 
-// 	// set the input with the hidden field so that you can call select on it
-//   let hiddenField = document.getElementById("hidden-input");
-//   hiddenField.value = copyh3.innerHTML;
-//   hiddenField.select();
-//   document.execCommand("copy");
-//   // const tooltip = document.getElementById("myTooltip");
-//   // tooltip.textContent = "Copied: " + hiddenField.value;
-//   clearInput();
-// }
-
-// document.querySelector("#firstColorObject").addEventListener("click", function(){
-
-//     var p1 = document.getElementById("p1");
-    
-//     // set "#Color 1" with the hidden field so that you can call select on it
-//     var hiddenField = document.getElementById("copyText");
-//     hiddenField.value = p1.innerHTML;
-//     hiddenField.select();
-//     document.execCommand("copy");
-    
-//     alert("Copied the text: " + hiddenField.value);
-
-// }, false);
