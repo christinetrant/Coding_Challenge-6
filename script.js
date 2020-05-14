@@ -2,14 +2,8 @@ const body = document.querySelector('body');
 const input = document.getElementById('input');
 const button = document.getElementById('button');
 const output = document.getElementsByClassName('output')[0];
-const h3 = document.getElementById('color-output');
-
-
-
-
-
-
-
+const h3PrintTitle = document.getElementById('color-output');
+const hiddenDiv = document.getElementById('hidden-div');
 
 
 
@@ -58,18 +52,25 @@ const hexToRgb = ((arr, color) => {
 	arr = arr.concat(tempArr);
 	// Empty temp Array
 	tempArr = [];
-	// Print out result
-	output.textContent = `Hex value ${color} into rgb values are: rgb(${arr[0]}, ${arr[1]}, ${arr[2]})`;
-	h3.style.display = "block";
-	h3.textContent = `rgb(${arr[0]}, ${arr[1]}, ${arr[2]})`;
-	// change input to the new value
-	// input.value = `rgb(${arr[0]}, ${arr[1]}, ${arr[2]})`
-	// add event listener so value can be copied
-	// h3.addEventListener('click', copyText, false);
-	// h3.addEventListener('click', copyText);
-	h3.addEventListener('mouseout', outFunc);
-	input.blur();
-	return rgb = `rgb(${arr[0]}, ${arr[1]}, ${arr[2]})`
+	// Check to make sure there are no NaNs (above 255)
+	let check = arr.some(item => Number.isNaN(item))
+	if(check === true) {
+		return inputError();
+	} else {
+		// Print out result
+		output.textContent = `Hex value ${color} into rgb values are: rgb(${arr[0]}, ${arr[1]}, ${arr[2]})`;
+		//Display output - make h3 color output and hidden div block display
+		displayOutput();
+		h3PrintTitle.textContent = `rgb(${arr[0]}, ${arr[1]}, ${arr[2]})`;
+		// change input to the new value
+		// input.value = `rgb(${arr[0]}, ${arr[1]}, ${arr[2]})`
+		// add event listener so value can be copied
+		// h3.addEventListener('click', copyText, false);
+		// h3.addEventListener('click', copyText);
+		h3PrintTitle.addEventListener('mouseout', outFunc);
+		input.blur();
+		return rgb = `rgb(${arr[0]}, ${arr[1]}, ${arr[2]})`	
+	}
 })
 
 // ---------- RGB TO HEX ---------- //
@@ -92,28 +93,35 @@ const rgbToHex = ((arr, color) => {
 		return parseInt(item);
 	})
 	// [255, 0, 0]
-	// work out what hex value should be - first char is division, second is remainder
-	arr = (arr.map(item => {
-		let hexOne = parseInt(item / 16);
-		let hexTwo = parseInt(item % 16);
-		return ([hexOne, hexTwo])
-	})).flat();
-	// Need to convert to Hex
-	arr = arr.map(item => item.toString(16));
-	// Add # and reduce array into a single string
-	arr.unshift('#')
-	arr = arr.join('');
-	// Print out result!
-	// h3.textContent = '';
-  h3.style.display = "block";
-	output.textContent = `rgb value ${color} into hex values are: ${arr}`;
-	h3.textContent = arr;
-	// input.value = arr;
-	input.blur();
-	// h3.addEventListener('click', copyText, false);
-	// h3.addEventListener('click', copyText);
-	h3.addEventListener('mouseout', outFunc);
-	return hex = arr;
+
+	// Check to make sure there are no values above 255
+	let check = arr.some(item => item > 255)
+	if(check === true) {
+		return inputError();
+	} else {
+		// work out what hex value should be - first char is division, second is remainder
+		arr = (arr.map(item => {
+			let hexOne = parseInt(item / 16);
+			let hexTwo = parseInt(item % 16);
+			return ([hexOne, hexTwo])
+		})).flat();
+		// Need to convert to Hex
+		arr = arr.map(item => item.toString(16));
+		// Add # and reduce array into a single string
+		arr.unshift('#')
+		arr = arr.join('');
+		// Print out result!
+		//Display output - make h3 color output and hidden div block display
+		displayOutput();
+		output.textContent = `rgb value ${color} into hex values are: ${arr}`;
+		h3PrintTitle.textContent = arr;
+		// input.value = arr;
+		input.blur();
+		// h3.addEventListener('click', copyText, false);
+		// h3.addEventListener('click', copyText);
+		h3PrintTitle.addEventListener('mouseout', outFunc);
+		return hex = arr;
+	}
 })
 
 
@@ -124,26 +132,44 @@ const init = (color) => {
 	if(color.includes('#') || color.length === 6 || color.length === 3) {
 		// console.log('Input is HEX');
 		hexToRgb(array, color);
-		return rgb;
+		// return rgb;
 	} else if(color.includes(',') || color.includes('rgb')) {
 		// console.log('Input is RGB');
 		rgbToHex(array, color);
-		return hex;
+		// return hex;
 	} else {
-		h3.style.display="block";
-		h3.textContent = 'No recognised HEX or RGB value detected';
-		// after showing no value reset to initial view
-		setTimeout(inputFocus, 2000);
+		inputError();
 	}
 }
 
 
+// if user enters incorrect values
+const inputError = () => {
+	//Display output - make h3 color output and hidden div block display
+	displayOutput()
+	h3PrintTitle.textContent = 'No recognised HEX or RGB value detected';
+	// after showing no value reset to initial view
+	setTimeout(clearInput, 2000);
+}
 
-const clearInput = () => input.value = 'Enter a color';
-const inputFocus = () => {
+
+// display result - change html to display block
+const displayOutput = () => {
+	h3PrintTitle.style.display = "block";
+	hiddenDiv.style.display = "block";
+}
+// return input text to original
+const clearInput = () => {
+	input.value = 'Enter a color';
 	input.select();
-	h3.textContent = '';
-  h3.style.display = "hidden";
+	h3PrintTitle.style.display = "none";
+	hiddenDiv.style.display = "none"
+}
+
+const inputFocus = () => {
+	input.value = 'Enter a color';
+	input.select();
+	h3PrintTitle.textContent = '';
 }
 const convertAfterClick = () => {
 	let inputValue = document.getElementById('input').value;
@@ -171,7 +197,7 @@ button.addEventListener("click", convertAfterClick);
 // h3.addEventListener("click", myFunction);
 
 
-h3.addEventListener("click", function(){
+h3PrintTitle.addEventListener("click", function(){
 
     var copy = document.getElementById("color-output");
 
@@ -184,7 +210,7 @@ h3.addEventListener("click", function(){
     // alert("Copied the text: " + hiddenField.value);
     const tooltip = document.getElementById("myTooltip");
 	  tooltip.textContent = "Copied: " + hiddenField.value;
-	  clearInput();
+	  // inputFocus();
 }, false);
 
 
