@@ -2,7 +2,7 @@ const body = document.querySelector('body');
 const input = document.getElementById('input');
 const button = document.getElementById('button');
 const output = document.getElementsByClassName('output')[0];
-const h3 = document.querySelector('h3');
+const h3 = document.getElementById('color-output');
 
 
 
@@ -14,10 +14,11 @@ const h3 = document.querySelector('h3');
 
 
 
-// const outFunc = () => {
-//   const tooltip = document.getElementById("myTooltip");
-//   tooltip.textContent = "Click to copy";
-// }
+const outFunc = () => {
+  const tooltip = document.getElementById("myTooltip");
+  tooltip.textContent = "Copy";
+  // h3.textContent = '';
+}
 
 
 // ---------- HEX TO RGB ---------- //
@@ -60,13 +61,14 @@ const hexToRgb = ((arr, color) => {
 	tempArr = [];
 	// Print out result
 	output.textContent = `Hex value ${color} into rgb values are: rgb(${arr[0]}, ${arr[1]}, ${arr[2]})`;
+	h3.style.display = "block";
 	h3.textContent = `rgb(${arr[0]}, ${arr[1]}, ${arr[2]})`;
 	// change input to the new value
 	// input.value = `rgb(${arr[0]}, ${arr[1]}, ${arr[2]})`
 	// add event listener so value can be copied
 	// h3.addEventListener('click', copyText, false);
 	// h3.addEventListener('click', copyText);
-	// h3.addEventListener('mouseout', outFunc);
+	h3.addEventListener('mouseout', outFunc);
 	input.blur();
 	return rgb = `rgb(${arr[0]}, ${arr[1]}, ${arr[2]})`
 })
@@ -103,13 +105,15 @@ const rgbToHex = ((arr, color) => {
 	arr.unshift('#')
 	arr = arr.join('');
 	// Print out result!
+	// h3.textContent = '';
+  h3.style.display = "block";
 	output.textContent = `rgb value ${color} into hex values are: ${arr}`;
 	h3.textContent = arr;
 	// input.value = arr;
 	input.blur();
 	// h3.addEventListener('click', copyText, false);
 	// h3.addEventListener('click', copyText);
-	// h3.addEventListener('mouseout', outFunc);
+	h3.addEventListener('mouseout', outFunc);
 	return hex = arr;
 })
 
@@ -134,8 +138,11 @@ const init = (color) => {
 
 
 const clearInput = () => input.value = 'Enter a color';
-const inputFocus = () => input.select();
-
+const inputFocus = () => {
+	input.select();
+	h3.textContent = '';
+  h3.style.display = "hidden";
+}
 const convertAfterClick = () => {
 	let inputValue = document.getElementById('input').value;
 	if(inputValue.length > 0) {
@@ -175,7 +182,7 @@ h3.addEventListener("click", function(){
     // alert("Copied the text: " + hiddenField.value);
     const tooltip = document.getElementById("myTooltip");
 	  tooltip.textContent = "Copied: " + hiddenField.value;
-
+	  clearInput();
 }, false);
 
 
