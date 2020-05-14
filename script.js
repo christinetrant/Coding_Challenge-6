@@ -14,10 +14,10 @@ const h3 = document.querySelector('h3');
 
 
 
-const outFunc = () => {
-  const tooltip = document.getElementById("myTooltip");
-  tooltip.textContent = "Click to copy";
-}
+// const outFunc = () => {
+//   const tooltip = document.getElementById("myTooltip");
+//   tooltip.textContent = "Click to copy";
+// }
 
 
 // ---------- HEX TO RGB ---------- //
@@ -65,8 +65,8 @@ const hexToRgb = ((arr, color) => {
 	// input.value = `rgb(${arr[0]}, ${arr[1]}, ${arr[2]})`
 	// add event listener so value can be copied
 	// h3.addEventListener('click', copyText, false);
-	h3.addEventListener('click', copyText);
-	h3.addEventListener('mouseout', outFunc);
+	// h3.addEventListener('click', copyText);
+	// h3.addEventListener('mouseout', outFunc);
 	input.blur();
 	return rgb = `rgb(${arr[0]}, ${arr[1]}, ${arr[2]})`
 })
@@ -108,8 +108,8 @@ const rgbToHex = ((arr, color) => {
 	// input.value = arr;
 	input.blur();
 	// h3.addEventListener('click', copyText, false);
-	h3.addEventListener('click', copyText);
-	h3.addEventListener('mouseout', outFunc);
+	// h3.addEventListener('click', copyText);
+	// h3.addEventListener('mouseout', outFunc);
 	return hex = arr;
 })
 
@@ -157,17 +157,56 @@ button.addEventListener("click", convertAfterClick);
 
 
 
-const copyText = () => {
-	const copyh3 = document.getElementById("color-output"); 
-	// set the input with the hidden field so that you can call select on it
-  let hiddenField = document.getElementById("hidden-input");
-  hiddenField.value = copyh3.innerHTML;
-  hiddenField.select();
-  document.execCommand("copy");
-  // const tooltip = document.getElementById("myTooltip");
-  // tooltip.textContent = "Copied: " + hiddenField.value;
-  clearInput();
-}
+
+
+// h3.addEventListener("click", myFunction);
+
+
+h3.addEventListener("click", function(){
+
+    var copy = document.getElementById("color-output");
+
+    // set "#Color 1" with the hidden field so that you can call select on it
+    var hiddenField = document.getElementById("copyText");
+    hiddenField.value = copy.innerHTML;
+    hiddenField.select();
+    document.execCommand("copy");
+
+    // alert("Copied the text: " + hiddenField.value);
+    const tooltip = document.getElementById("myTooltip");
+	  tooltip.textContent = "Copied: " + hiddenField.value;
+
+}, false);
+
+
+
+// const copyToClipboard = () => {
+  /* Get the text field */
+  // var copyText = h3.textContent;
+
+  /* Select the text field */
+  // copyText.select();
+  // copyText.setSelectionRange(0, 99999); /*For mobile devices*/
+
+  /* Copy the text inside the text field */
+  // document.execCommand("copy");
+
+  /* Alert the copied text */
+  // alert("Copied the text: " + copyText);
+// }
+
+
+// const copyText = () => {
+// 	const copyh3 = document.getElementById("color-output"); 
+// 	// set the input with the hidden field so that you can call select on it
+//   let hiddenField = document.getElementById("hidden-input");
+//   hiddenField.value = copyh3.innerHTML;
+//   hiddenField.select();
+//   document.execCommand("copy");
+//   // const tooltip = document.getElementById("myTooltip");
+//   // tooltip.textContent = "Copied: " + hiddenField.value;
+//   clearInput();
+// }
 
 // document.querySelector("#firstColorObject").addEventListener("click", function(){
 
