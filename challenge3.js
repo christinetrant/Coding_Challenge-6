@@ -25,8 +25,8 @@
 
 
 // Example in comments - find red - 
-let input = 'rgb(255, 0, 0)'
-let input2 = '#fF0000';
+// let input = 'rgb(255, 0, 0)'
+// let input2 = '#fF0000';
 
 // ---------- HEX TO RGB ---------- //
 const hexToRgb = ((arr, color) => {
@@ -101,8 +101,8 @@ const hexToRgb = ((arr, color) => {
 	// Empty temp Array
 	tempArr = [];
 	// Print out result
-	console.log(`Hex value ${color} into rgb values are: rgb(${arr[0]}, ${arr[1]}, ${arr[2]})`)
-	return rgb = `rgb(${arr[0]}, ${arr[1]}, ${arr[2]})`
+	// console.log(`Hex value ${color} into rgb values are: rgb(${arr[0]}, ${arr[1]}, ${arr[2]})`)
+	return result = `rgb(${arr[0]}, ${arr[1]}, ${arr[2]})`
 })
 
 // ---------- RGB TO HEX ---------- //
@@ -174,8 +174,8 @@ const rgbToHex = ((arr, color) => {
 	arr.unshift('#')
 	arr = arr.join('');
 	// Print out result!
-	console.log(`rgb value ${color} into hex values are: ${arr}`);
-	return hex = arr;
+	// console.log(`rgb value ${color} into hex values are: ${arr}`);
+	return result = arr;
 })
 
 
@@ -186,19 +186,20 @@ const init = (color) => {
 
 	// Need to figure out if hex or rgb:
 	if(color.includes('#') || color.length === 6 ) {
-		console.log('Input is HEX');
+		// console.log('Input is HEX');
 		hexToRgb(array, color);
-		return rgb;
+		return result;
 	} else if(color.includes(',') || color.includes('rgb')) {
-		console.log('Input is RGB');
+		// console.log('Input is RGB');
 		rgbToHex(array, color);
-		return hex;
+		return result;
 	} else {
-		console.log('No recognised HEX or RGB value detected')
+		// console.log('No recognised HEX or RGB value detected')
+		return 'No recognised HEX or RGB value detected';
 	}
 }
 // init(input);
 // init(input2);
-init('dde456') // 221, 228, 86
+// init('dde456') // 221, 228, 86
 // init('#dde456')
 // init('rgb(243, 45, 67)') // #F32D43
