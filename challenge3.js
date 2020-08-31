@@ -201,4 +201,4 @@ const init = (color) => {
 // init(input2);
 // init("dde456"); // 221, 228, 86
 // init('#dde456')
-init("RGB(243, 45, 67)"); // #F32D43
+// init("RGB(243, 45, 67)"); // #F32D43
